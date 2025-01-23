@@ -103,52 +103,41 @@
     
     <!-- Cargar la biblioteca jwt-decode -->
     <script>
+        const token = localStorage.getItem('token');
+
+        // Luego, carga el script de jwt-decode
         const script = document.createElement('script');
-        // Cargar la librería jwt-decode para decodificar el token JWT
         script.src = 'https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js'; 
-    
         script.onload = () => {
             console.log('jwt-decode cargado correctamente');
-            
-            // Obtener el token de localStorage
-            const token = localStorage.getItem('token');
-            
-            if (token) {
-                try {
-                    // Intentamos decodificar el token
-                    const decodedToken = jwt_decode(token);
-                    console.log('Token decodificado:', decodedToken);
-    
-                    // Verificamos que el token tiene la propiedad 'name' y que no ha expirado
-                    const currentTime = Date.now() / 1000; // Tiempo actual en segundos
-                    if (decodedToken.name && decodedToken.exp > currentTime) {
-                        // Si el token es válido, mostrar el nombre del usuario
-                        document.getElementById('user-name').textContent = decodedToken.name;
-    
-                        // Mostrar el saludo y el enlace al perfil (puedes esconder estos elementos por defecto con CSS)
-                        document.getElementById('greeting').style.display = 'inline';
-                        document.getElementById('profile-link').style.display = 'inline';
-                    } else {
-                        // Si el token está expirado o no tiene la propiedad 'name', lo eliminamos
-                        console.log('El token está expirado o es inválido.');
-                        localStorage.removeItem('token'); // Eliminar el token expirado o inválido
+                if (token) {
+                    try {
+                        const decodedToken = jwt_decode(token);
+                        console.log('Token decodificado:', decodedToken);
+                        
+                        // Verificar si el token tiene la propiedad name y si está dentro de su fecha de expiración
+                        const currentTime = Date.now() / 1000;
+                        if (decodedToken.name && decodedToken.exp > currentTime) {
+                            // Si el token es válido, mostrar el saludo con el nombre
+                            document.getElementById('user-name').textContent = decodedToken.name;
+                            document.getElementById('greeting').style.display = 'inline'; // Mostrar el saludo
+                            document.getElementById('profile-link').style.display = 'inline'; // Mostrar el enlace del perfil
+                        } else {
+                            console.log('El token está expirado o es inválido.');
+                            localStorage.removeItem('token'); // Eliminar el token expirado o inválido
+                        }
+                    } catch (error) {
+                        console.error('Error al decodificar el token:', error);
+                        localStorage.removeItem('token'); // Si ocurre un error, eliminar el token
                     }
-                } catch (error) {
-                    // Si ocurre un error al decodificar el token, eliminamos el token
-                    console.error('Error al decodificar el token:', error);
-                    localStorage.removeItem('token'); // Eliminar el token si hay un error
+                } else {
+                    console.log('No hay token en el localStorage');
                 }
-            } else {
-                // Si no hay token, no se muestra nada
-                console.log('No hay token en el localStorage');
-            }
         };
-    
-        // Añadimos el script dinámicamente a la página
+
         document.body.appendChild(script);
+
     </script>
     
 </body>
 </html>
-
-
