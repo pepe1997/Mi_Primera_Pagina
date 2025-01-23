@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <img src="imagen/logo-2.png" alt="Logo">
+        <nav>
+            <ul class="menu">
+                <li><a href="index.html">INICIO</a></li>
+                <li><a href="events.html">EVENTOS</a></li>
+                <li><a href="register.html">CONTACTANOS</a></li>
+                <!-- Mostrar el nombre solo si el token está presente -->
+                <p id="greeting" style="display:none;">Hola, <span id="user-name"></span>!</p> <!-- Mostrar el nombre aquí, por defecto oculto -->
+                <a href="profile.html" style="display:none;" id="profile-link">Ver y modificar tus datos</a>
+            </ul>
+        </nav>
+        <a href="donation.html" class="buttons-donacion">DONACION</a>
+    </header>
+
+    <section class="hero">
+        <h1>BIENVENIDOS A PATITAS ALEGRES</h1>
+        <div id="carouselExample" class="carousel slide custom-carousel" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="imagen/carrucel-1.jpg" class="d-block w-100" >
+                </div>
+                <div class="carousel-item">
+                    <img src="imagen/carrucel-3.jpg" class="d-block w-100" >
+                </div>
+                <div class="carousel-item">
+                    <img src="imagen/carrucel-4.jpg" class="d-block w-100" >
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+    <section class="events">
+        <h1>¿QUIENES SOMOS?</h1>
+        <p>En Patitas Alegres, somos una fundación dedicada al rescate, cuidado y protección de animales en situación 
+            de abandono o maltrato. Nuestro compromiso es brindarles un hogar temporal donde reciban el cariño, atención 
+            médica y alimentación necesarios para su bienestar. Creemos firmemente en la importancia de crear una sociedad 
+            más empática y consciente del cuidado animal. </p>
+        <div class="event-grid">
+            <div class="event-card">
+                <h2>METAS</h2>
+                <P>Las metas que tenemos son la rescatar y rehabilitar animales
+                    en situaciones de vulnerabilidad, proponer la adopcion responsables
+                     y fomentar la educacion sobre el respeto y bienestar animal en la comunidad.
+                </P>  
+            </div>
+            <div class="event-card">
+                <h2>APORTE</h2>
+                <p>Nuestro albergue ofrece una segunda oportunidad a cientos de animales, 
+                    transformando sus vidas a través del cuidado y la inclusión. </p>
+            </div>
+            <div class="event-card">
+                <h2>CAMBIO SOCIAL</h2>
+                <p>Contribuimos a construir una sociedad más justa y solidaria, 
+                    fomentando la responsabilidad colectiva hacia los animales y 
+                    promoviendo el respeto por la vida en todas sus formas.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="events">
+        <h1>MISION Y VISION</h1>
+        <div class="event-grid">
+            <div class="event-card">
+                <h2>MISION</h2>
+                <p>Brindar refugio, cuidado y amor a los animales más necesitados, 
+                    garantizando su rehabilitación y promoviendo adopciones responsables,
+                     mientras creamos conciencia sobre el respeto animal en nuestra comunidad.</p>
+            </div>
+            <div class="event-card">
+                <h2>VISION</h2>
+                <p>Ser reconocidos como un modelo de referencia en el rescate y cuidado animal,
+                     logrando una sociedad donde cada ser vivo sea valorado y respetado, y 
+                     donde ningún animal sufra abandono o maltrato.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Environment Charity. All rights reserved.</p>
+    </footer>
+
+    <!-- Agregar Bootstrap JS solo para el carrusel -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Cargar la biblioteca jwt-decode -->
+    <script>
+        const script = document.createElement('script');
+        // Cargar la librería jwt-decode para decodificar el token JWT
+        script.src = 'https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js'; 
+    
+        script.onload = () => {
+            console.log('jwt-decode cargado correctamente');
+            
+            // Obtener el token de localStorage
+            const token = localStorage.getItem('token');
+            
+            if (token) {
+                try {
+                    // Intentamos decodificar el token
+                    const decodedToken = jwt_decode(token);
+                    console.log('Token decodificado:', decodedToken);
+    
+                    // Verificamos que el token tiene la propiedad 'name' y que no ha expirado
+                    const currentTime = Date.now() / 1000; // Tiempo actual en segundos
+                    if (decodedToken.name && decodedToken.exp > currentTime) {
+                        // Si el token es válido, mostrar el nombre del usuario
+                        document.getElementById('user-name').textContent = decodedToken.name;
+    
+                        // Mostrar el saludo y el enlace al perfil (puedes esconder estos elementos por defecto con CSS)
+                        document.getElementById('greeting').style.display = 'inline';
+                        document.getElementById('profile-link').style.display = 'inline';
+                    } else {
+                        // Si el token está expirado o no tiene la propiedad 'name', lo eliminamos
+                        console.log('El token está expirado o es inválido.');
+                        localStorage.removeItem('token'); // Eliminar el token expirado o inválido
+                    }
+                } catch (error) {
+                    // Si ocurre un error al decodificar el token, eliminamos el token
+                    console.error('Error al decodificar el token:', error);
+                    localStorage.removeItem('token'); // Eliminar el token si hay un error
+                }
+            } else {
+                // Si no hay token, no se muestra nada
+                console.log('No hay token en el localStorage');
+            }
+        };
+    
+        // Añadimos el script dinámicamente a la página
+        document.body.appendChild(script);
+    </script>
+    
+</body>
+</html>
+
+
