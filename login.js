@@ -25,6 +25,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
 
         if (response.ok) {
             // Guardar el token en localStorage
+            localStorage.removeItem('token');
             console.log('Token recibido:', data.token); // <-- AGREGA ESTO
             localStorage.setItem('token', data.token);  // Asegúrate de que 'data.token' sea el token real del servidor
 
