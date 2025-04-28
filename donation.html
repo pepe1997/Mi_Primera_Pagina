@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Realiza tu Donación</h1>
+        <!-- <a href="https://paypal.me/PatitasAlegres850" target="_blank" class="buttons-donacion">Paypal</a> -->
+        <a href="#" target="_blank" class="buttons-donacion">Paypal</a>
+    </header>
+
+    <main>
+        <section class="donation-form">
+            <h2>Ingresa tus datos personales</h2>
+            <form id="donationForm" novalidate onsubmit="submitForm(event)">
+
+                <div class="step-1">
+                    <label for="name">Nombre:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" id="apellido" name="apellido" required>
+
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="amount">Monto a Donar:</label>
+                    <input type="number" id="amount" name="amount" min="1" required>
+
+                    <label for="tipo-moneda">Tipo moneda:</label>
+                    <select id="tipo-moneda" name="tipo-moneda" required>
+                        <option value="">Seleccione la moneda</option>
+                        <option value="soles">Soles</option>
+                        <option value="dolares">Dolares</option>
+                    </select>
+
+                    <label for="payment-method">Método de Pago:</label>
+                    <select id="payment-method" name="payment-method" required onchange="showPaymentFields()">
+                        <option value="">Seleccione un método de pago</option>
+                        <option value="credit-card">Tarjeta de Crédito</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="bank-transfer">Transferencia Bancaria</option>
+                    </select>
+                </div>
+
+                <!-- Segundo paso: Campos según el método de pago -->
+                <div class="step-2" id="paymentFields" style="display: none;">
+                    <h3>Ingresa los datos de tu pago</h3>
+                    
+                    <!-- Campos para tarjeta de crédito -->
+                    <div class="payment-options credit-card" style="display: none;">
+                        <label for="credit-card-number">Número de Tarjeta de Crédito:</label>
+                        <input type="text" id="credit-card-number" name="credit-card-number" required>
+
+                        <label for="credit-card-expiry">Fecha de Expiración:</label>
+                        <input type="text" id="credit-card-expiry" name="credit-card-expiry" required>
+
+                        <label for="credit-card-cvc">CVC:</label>
+                        <input type="text" id="credit-card-cvc" name="credit-card-cvc" required>
+                    </div>
+
+                    <!-- Campos para PayPal -->
+                    <div class="payment-options paypal" style="display: none;">
+                        <label for="paypal-email">Correo Electrónico de PayPal:</label>
+                        <input type="email" id="paypal-email" name="paypal-email" required>
+                    </div>
+
+                    <!-- Campos para transferencia bancaria -->
+                    <div class="payment-options bank-transfer" style="display: none;">
+                        <label for="bank-account">Número de Cuenta Bancaria:</label>
+                        <input type="text" id="bank-account" name="bank-account" required>
+
+                        <label for="bank-name">Nombre del Banco:</label>
+                        <input type="text" id="bank-name" name="bank-name" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="donate-button">Realizar Donación</button>
+            </form>
+        </section>
+        <script>
+            function submitForm(event) {
+                event.preventDefault(); // Evita que el formulario se envíe de la manera predeterminada
+                
+                // Recopilamos los datos del formulario
+                const form = document.getElementById('donationForm');
+                const formData = new FormData(form);
+            
+                // Creamos una URL con los parámetros del formulario
+                const params = new URLSearchParams();
+                formData.forEach((value, key) => {
+                    params.append(key, value);
+                });
+            
+                // Verifica en consola los datos recopilados
+                console.log('Datos enviados:', params.toString());
+            
+                // Redirigimos a la página de confirmación con los parámetros
+                window.location.href = 'donation-confirmation.html?' + params.toString();
+            }
+        </script>
+        
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Fundación Progresemos Juntos. Todos los derechos reservados.</p>
+    </footer> 
+
+    <script src="app.js"></script>
+</body>
+</html>
+

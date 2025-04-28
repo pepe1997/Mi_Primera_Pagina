@@ -1,0 +1,481 @@
+
+
+
+/* --------------------------------------------------------------
+   Variables raíz: Definición de colores y estilos globales.
+-------------------------------------------------------------- */
+:root {
+    --primary-color: #007bff;      /* Color principal para botones y enlaces */
+    --secondary-color: #28a745;    /* Color secundario para botones y acentos */
+    --background-color: #f4f4f4;   /* Color de fondo general */
+    --text-color: #333;            /* Color de texto general */
+    --footer-bg-color: #333;       /* Color de fondo del pie de página */
+    --footer-text-color: white;    /* Color del texto en el pie de página */
+}
+
+/* --------------------------------------------------------------
+   Estilos generales: Configuración básica de la página.
+-------------------------------------------------------------- */
+
+/* Establece que el cuerpo de la página ocupe toda la altura de la pantalla */
+html, body {
+    height: 100%;
+    margin: 0; /* Elimina márgenes predeterminados */
+}
+
+/* Estilo general para el cuerpo de la página */
+body {
+    font-family: Arial, sans-serif; /* Define la fuente para el texto */
+    margin: 0; /* Elimina márgenes predeterminados */
+    padding: 0; /* Elimina relleno predeterminado */
+    box-sizing: border-box; /* Hace que el padding y el borde se incluyan en el ancho y alto */
+    overflow-y: auto; /* Permite el desplazamiento vertical si es necesario */
+    background-color: var(--background-color); /* Establece el color de fondo de la página */
+    color: var(--text-color); /* Establece el color del texto */
+    line-height: 1.6; /* Define el interlineado */
+    display: flex; /* Utiliza flexbox para organización */
+    flex-direction: column; /* Organiza los elementos de arriba hacia abajo */
+    min-height: 100vh; /* Asegura que el cuerpo ocupe al menos toda la altura de la ventana */
+}
+
+/* --------------------------------------------------------------
+   Estilos del encabezado (header): Barra de navegación.
+-------------------------------------------------------------- */
+header {
+    display: flex; /* Utiliza flexbox para organizar el contenido dentro del encabezado */
+    align-items: center; /* Centra los elementos verticalmente */
+    justify-content: space-between; /* Coloca los elementos a los extremos */
+    padding: 10px 20px; /* Relleno alrededor del contenido */
+    background-color: #f4f4f4; /* Establece el color de fondo del encabezado */
+}
+
+/* Logo dentro del encabezado */
+header img {
+    height: 70px; /* Establece la altura del logo */
+}
+
+/* Estilos para el menú de navegación */
+.menu {
+    list-style: none; /* Elimina los puntos de la lista */
+    padding: 0; /* Elimina el relleno de la lista */
+    margin: 0; /* Elimina el margen de la lista */
+    display: flex; /* Utiliza flexbox para el menú */
+    gap: 20px; /* Añade espacio entre los elementos del menú */
+}
+
+/* Estilo de los enlaces del menú */
+.menu > li > a {
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    color: var(--text-color); /* Establece el color del texto de los enlaces */
+    padding: 10px 15px; /* Añade relleno alrededor del enlace */
+    display: block; /* Hace que el enlace ocupe todo el área del li */
+    transition: background-color 0.3s; /* Añade un efecto de transición al color de fondo */
+}
+
+/* Efecto hover en los enlaces del menú */
+.menu > li > a:hover {
+    background-color: #ddd; /* Cambia el color de fondo cuando el cursor pasa por encima */
+}
+
+/* --------------------------------------------------------------
+   Estilos para los botones de donación.
+-------------------------------------------------------------- */
+
+.buttons-donacion {
+    background: #ff7043;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.buttons-donacion:hover {
+    transform: scale(1.1);
+    background-color: #e64a19;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+/* --------------------------------------------------------------
+   Sección principal (Hero Section): Información destacada.
+-------------------------------------------------------------- */
+.hero {
+    text-align: center; /* Centra el texto dentro de la sección */
+    padding: 50px 20px; /* Relleno alrededor del contenido */
+    background-color: #e9f7ef; /* Establece el color de fondo */
+}
+
+/* Título de la sección Hero */
+.hero h1 {
+    font-size: 2.5em; /* Tamaño de fuente grande */
+    color: var(--text-color); /* Establece el color del texto */
+}
+
+/* Descripción en la sección Hero */
+.hero p {
+    font-size: 1.2em; /* Tamaño de fuente más pequeño que el título */
+    margin: 20px 0; /* Añade espacio arriba y abajo del párrafo */
+}
+
+/* Botones dentro de la sección Hero */
+.buttons a {
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    padding: 10px 20px; /* Añade relleno alrededor del botón */
+    margin: 0 10px; /* Añade espacio entre los botones */
+    background-color: var(--primary-color); /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s; /* Transición suave para el cambio de color */
+}
+
+/* Efecto hover en los botones Hero */
+.buttons a:hover {
+    background-color: #0056b3; /* Cambia el color de fondo al pasar el cursor */
+}
+
+/* --------------------------------------------------------------
+   Sección de eventos: Mostrar eventos disponibles.
+-------------------------------------------------------------- */
+.events {
+    padding: 20px; /* Relleno alrededor del contenido */
+    background: var(--background-color); /* Color de fondo de la sección */
+}
+
+/* Título de la sección de eventos */
+.events h1 {
+    text-align: center; /* Centra el título */
+    margin-bottom: 20px; /* Añade espacio debajo del título */
+    font-size: 2em; /* Tamaño de la fuente */
+    color: var(--text-color); /* Color del texto */
+}
+
+/* Configuración de la cuadrícula para los eventos */
+.event-grid {
+    display: grid; /* Utiliza un grid para organizar los eventos */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Configura las columnas para adaptarse al tamaño de la pantalla */
+    gap: 20px; /* Añade espacio entre los elementos */
+    margin-top: 20px; /* Añade espacio superior */
+}
+
+/* Tarjetas de evento: Estilo de los bloques individuales */
+.event-card {
+    background: white; /* Color de fondo blanco para las tarjetas */
+    padding: 15px; /* Relleno alrededor del contenido */
+    border: 1px solid #ddd; /* Borde suave */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil alrededor de la tarjeta */
+    text-align: center; /* Centra el texto dentro de la tarjeta */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.event-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Título dentro de las tarjetas de evento */
+.event-card h2 {
+    font-size: 1.5em; /* Tamaño de fuente grande */
+    color: var(--text-color); /* Color del texto */
+    margin-bottom: 10px; /* Añade espacio debajo del título */
+}
+
+/* Descripción en las tarjetas de evento */
+.event-card p {
+    color: #666; /* Color de texto gris suave */
+    margin-bottom: 15px; /* Añade espacio debajo del párrafo */
+}
+
+/* Enlace en las tarjetas de evento */
+.event-card a {
+    text-decoration: none; /* Elimina el subrayado */
+    color: var(--primary-color); /* Color del enlace */
+    font-weight: bold; /* Hace que el texto sea negrita */
+}
+
+/* Efecto hover en los enlaces de las tarjetas de evento */
+.event-card a:hover {
+    text-decoration: underline; /* Subraya el texto cuando el cursor pasa por encima */
+}
+
+/* --------------------------------------------------------------
+   Sección de pie de página (footer): Información adicional.
+-------------------------------------------------------------- */
+footer {
+    background: #333; /* Fondo oscuro */
+    color: #fff; /* Texto blanco */
+    text-align: center; /* Centra el contenido */
+    padding: 20px 0; /* Relleno vertical */
+    margin-top: auto; /* Empuja el footer hacia el final */
+}
+
+footer a {
+    color: #1e90ff; /* Color azul para los enlaces */
+    text-decoration: none; /* Elimina el subrayado */
+    font-weight: bold; /* Hace los enlaces más destacados */
+}
+
+footer a:hover {
+    color: #ff6347; /* Cambia el color a rojo tomate al pasar el mouse */
+    text-decoration: underline; /* Subraya el enlace al pasar el mouse */
+}
+
+
+
+/* --------------------------------------------------------------
+   Sección de contacto: Información para contactar.
+-------------------------------------------------------------- */
+.contact {
+    padding: 50px; /* Relleno alrededor del contenido */
+    background: #f4f4f4; /* Color de fondo */
+}
+
+/* Título de la sección de contacto */
+.contact h1 {
+    text-align: center; /* Centra el título */
+    margin-bottom: 20px; /* Añade espacio debajo del título */
+    font-size: 2em; /* Tamaño de la fuente */
+    color: var(--text-color); /* Color del texto */
+}
+
+/* Configuración de la cuadrícula para los elementos de contacto */
+.contact-grid {
+    display: grid; /* Utiliza un grid para organizar los elementos de contacto */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Configura las columnas para adaptarse al tamaño de la pantalla */
+    gap: 20px; /* Añade espacio entre los elementos */
+}
+
+/* Elementos individuales de contacto */
+.contact-item {
+    background: white; /* Color de fondo blanco para cada elemento de contacto */
+    padding: 20px; /* Relleno dentro del elemento */
+    border: 1px solid #ddd; /* Borde suave */
+    border-radius: 5px; /* Bordes redondeados */
+    display: flex; /* Usa flexbox para los elementos */
+    align-items: center; /* Alinea los elementos verticalmente */
+    gap: 15px; /* Añade espacio entre los elementos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil alrededor de cada elemento */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.contact-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Imagen en los elementos de contacto */
+.contact-item img {
+    width: 50px; /* Establece el tamaño de la imagen */
+    height: 50px; /* Establece el tamaño de la imagen */
+}
+
+/* Título dentro de los elementos de contacto */
+.contact-item h2 {
+    font-size: 1.2em; /* Tamaño de fuente */
+    color: var(--text-color); /* Color del texto */
+    margin: 0 0 5px 0; /* Elimina márgenes de los lados y añade espacio abajo */
+}
+
+/* Descripción en los elementos de contacto */
+.contact-item p {
+    margin: 0; /* Elimina el margen del párrafo */
+    color: #666; /* Color del texto */
+}
+
+/* Enlace en los elementos de contacto */
+.contact-item a {
+    text-decoration: none; /* Elimina el subrayado */
+    color: var(--primary-color); /* Color del enlace */
+    transition: color 0.3s; /* Transición suave para el cambio de color */
+}
+
+/* Efecto hover en los enlaces de contacto */
+.contact-item a:hover {
+    color: #0056b3; /* Cambia el color al pasar el cursor */
+}
+
+/* --------------------------------------------------------------
+   Estilos para la página de donación: Formulario de donación.
+-------------------------------------------------------------- */
+.donation-form {
+    padding: 20px; /* Relleno alrededor del formulario */
+    background-color: white; /* Color de fondo blanco para el formulario */
+    max-width: 500px; /* Ancho máximo */
+    margin: 0 auto; /* Centra el formulario */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil alrededor del formulario */
+}
+
+/* --------------------------------------------------------------
+   Estilos para la página de donación.
+-------------------------------------------------------------- */
+
+/* Título en la página de donación */
+.donation-form h2 {
+    text-align: center; /* Centra el texto */
+    margin-bottom: 20px; /* Añade espacio debajo del título */
+    font-size: 1.8em; /* Tamaño de la fuente */
+    color: var(--text-color); /* Color del texto */
+}
+
+/* Estilo de los inputs y selects en el formulario de donación */
+.donation-form input, .donation-form select {
+    width: 100%; /* Hace que el campo ocupe todo el ancho disponible */
+    padding: 10px; /* Relleno dentro del campo */
+    margin: 10px 0; /* Añade espacio arriba y abajo del campo */
+    border: 1px solid #ddd; /* Borde suave */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Estilo del botón de donación */
+.donate-button {
+    background-color: var(--secondary-color); /* Color de fondo */
+    color: white; /* Color del texto */
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    padding: 10px 20px; /* Relleno dentro del botón */
+    border-radius: 5px; /* Bordes redondeados */
+    width: 100%; /* Hace que el botón ocupe todo el ancho disponible */
+    text-align: center; /* Centra el texto dentro del botón */
+    transition: background-color 0.3s; /* Transición suave para el cambio de color */
+}
+
+/* Efecto hover en el botón de donación */
+.donate-button:hover {
+    background-color: #218838; /* Cambia el color de fondo cuando el usuario pasa el cursor */
+}
+
+/* --------------------------------------------------------------
+   Estilos para la página de confirmación de donación.
+-------------------------------------------------------------- */
+
+/* Contenedor principal de la página de confirmación de donación */
+.donation-receipt {
+    padding: 20px; /* Relleno dentro del contenedor */
+    background-color: white; /* Color de fondo */
+    max-width: 600px; /* Ancho máximo */
+    margin: 0 auto; /* Centra el contenedor */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave alrededor del contenedor */
+}
+
+/* Título en la página de confirmación de donación */
+.donation-receipt h2 {
+    text-align: center; /* Centra el texto */
+    margin-bottom: 20px; /* Añade espacio debajo del título */
+    font-size: 2em; /* Tamaño de la fuente */
+    color: var(--text-color); /* Color del texto */
+}
+
+/* Descripción de la donación en la página de confirmación */
+.donation-receipt p {
+    font-size: 1.2em; /* Tamaño de la fuente */
+    margin-bottom: 10px; /* Añade espacio debajo del párrafo */
+    color: var(--text-color); /* Color del texto */
+}
+
+/* Botón de descarga de recibo de donación */
+.download-button {
+    margin-top: 20px; /* Añade espacio encima del botón */
+    padding: 10px 20px; /* Relleno dentro del botón */
+    background-color: var(--primary-color); /* Color de fondo */
+    color: white; /* Color del texto */
+    border-radius: 5px; /* Bordes redondeados */
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    display: block; /* Hace que el botón ocupe todo el ancho */
+    width: 100%; /* Hace que el botón ocupe todo el ancho disponible */
+    text-align: center; /* Centra el texto dentro del botón */
+}
+
+/* Efecto hover en el botón de descarga */
+.download-button:hover {
+    background-color: #0056b3; /* Cambia el color de fondo cuando el usuario pasa el cursor */
+}
+
+/* Botón para regresar a la página anterior */
+.back-button {
+    display: inline-block; /* Hace que el botón se comporte como un bloque en línea */
+    text-align: center; /* Centra el texto dentro del botón */
+    width: 100%; /* Hace que el botón ocupe todo el ancho disponible */
+    margin-top: 15px; /* Añade espacio encima del botón */
+}
+
+/* Estilos del carrusel */
+.custom-carousel .carousel-inner {
+    border-radius: 10px;
+}
+
+.custom-carousel .carousel-item img {
+    border-radius: 10px;
+}
+
+/* Estilos adicionales para los controles del carrusel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: #000; /* Cambia el color de los controles */
+}
+/* Estilo para las imágenes del carrusel */
+.carousel-item img {
+    width: 100%;
+    height: 500px; /* Ajusta la altura según lo que necesites */
+    object-fit: cover; /* Escala la imagen para llenar el contenedor sin deformarla */
+    object-position: center; /* Centra la imagen dentro del contenedor */
+}
+
+
+/* Contenedor del formulario */
+.form-container {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+
+#register-page button {
+    width: 100%;
+    padding: 10px;
+    background-color: #45a049;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#register-page button:hover {
+    background-color: #4CAF50;
+}
+
+#register-page p {
+    text-align: center;
+    font-size: 14px;
+}#register-page a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+#register-page a:hover {
+    text-decoration: underline;
+}
+

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-blue-600 text-white py-4">
+        <h1 class="text-center text-2xl font-bold">PROGRESEMOS JUNTOS</h1>
+        <a href="index.html" class="absolute top-4 right-4 bg-white text-blue-600 font-bold py-2 px-4 rounded shadow hover:bg-gray-100 transition">
+          Volver al Inicio
+      </a>
+    </header>
+    
+      <main class="container mx-auto mt-10 p-5">
+        <section class="bg-white shadow-md rounded-lg p-6">
+          <h2 class="text-xl font-semibold text-center mb-4">[HAS TU DONACION]</h2>
+          <div class="flex flex-col space-y-6">
+            <!-- Bank Information -->
+            <div style="text-align: center;" class="border rounded-lg p-4 bg-blue-50">
+              <h3 class="text-lg font-bold text-blue-700">Transferencia Bancaria</h3>
+              <p class="mt-2"><i class="fas fa-university text-blue-500"></i> <strong>Banco:</strong> Banco de Ejemplo</p>
+              <p><i class="fas fa-user text-blue-500"></i> <strong>Nombre:</strong> Fundación Progresemos Juntos</p>
+              <p><i class="fas fa-hashtag text-blue-500"></i> <strong>Número de Cuenta:</strong> 123-456-7890</p>
+            </div>
+    
+            <!-- PayPal Donation -->
+            <div class="border rounded-lg p-4 bg-yellow-50 text-center">
+              <h3 class="text-lg font-bold text-yellow-700">Donar vía PayPal</h3>
+              <p class="mt-2 mb-4">Contribuye con un solo clic a través de PayPal</p>
+              <a href="#" target="_blank" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                <i class="fab fa-paypal mr-2"></i> Donar con PayPal
+              </a>
+            </div>
+            <!-- Simluacion de progreso de recaudacion -->
+            <section class="mt-10 bg-green-50 p-6 rounded-lg shadow-md">
+              <h2 class="text-xl font-semibold text-center mb-4">Progreso de Recaudación</h2>
+              <div class="w-full bg-gray-200 rounded-full h-6">
+                  <div class="bg-green-500 h-6 rounded-full text-center text-white" id="progress-bar" style="width: 50%;">
+                      50%
+                  </div>
+              </div>
+              <p class="text-center mt-2" id="progress-text">S/ 500 recaudados de S/ 1000</p>
+            </section>
+          
+          
+          </div>
+        </section>
+
+
+      
+      </main>
+
+    <footer >
+        <p>&copy; 2025 Fundación Progresemos Juntos. Todos los derechos reservados.</p>
+        <p>
+            <a href="index.html">Sobre Nosotros</a> | 
+            <a href="contact.html">Contáctanos</a> | 
+            <a href="privacity.html">Política de Privacidad</a>
+        </p>
+    </footer>
+    <script>
+      // Simulación de valores configurados manualmente
+        const goal = 1000; // Meta total
+        const currentAmount = 251; // Monto recaudado manualmente
+
+        // Calcular el porcentaje de progreso
+        const progressPercent = (currentAmount / goal) * 100;
+
+        // Actualizar la barra de progreso y el texto
+        const progressBar = document.getElementById("progress-bar");
+        const progressText = document.getElementById("progress-text");
+
+        progressBar.style.width = `${progressPercent}%`;
+        progressBar.textContent = `${Math.round(progressPercent)}%`;
+        progressText.textContent = `S/ ${currentAmount} recaudados de S/ ${goal}`;
+
+    </script>
+    
+          
+</body>
+</html>
+
+
+

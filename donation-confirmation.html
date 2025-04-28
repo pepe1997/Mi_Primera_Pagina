@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Donación</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1>Confirmación de Donación</h1>
+    </header>
+
+    <main>
+        <section class="donation-receipt">
+            <h2>Boleta de Donación</h2>
+            <p><strong>Nombre:</strong> <span id="receipt-name">Cargando...</span></p>
+            <p><strong>Apellido:</strong> <span id="receipt-apellido">Cargando...</span></p>
+            <p><strong>Correo Electrónico:</strong> <span id="receipt-email">Cargando...</span></p>
+            <p><strong>Monto Donado:</strong> <span id="receipt-amount">Cargando...</span></p>
+            <p><strong>Tipo moneda:</strong> <span id="receipt-tipo-moneda">Cargando...</span></p>
+            <p><strong>Método de Pago:</strong> <span id="receipt-method">Cargando...</span></p>
+
+            <button id="downloadReceipt" class="download-button">Descargar Boleta en PDF</button>
+            <a href="index.html" class="back-button">Volver al Inicio</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Environment Charity. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Obtener los parámetros de la URL
+        const params = new URLSearchParams(window.location.search);
+
+        // Muestra los parámetros en la consola para asegurarte de que llegan correctamente
+        console.log('Parámetros recibidos:', Object.fromEntries(params.entries()));
+
+        // Lee cada parámetro
+        const name = params.get('name');
+        const apellido = params.get('apellido');
+        const email = params.get('email');
+        const amount = params.get('amount');
+        const tipoMoneda = params.get('tipo-moneda');
+        const paymentMethod = params.get('payment-method');
+
+
+        // Verificar si los parámetros existen
+        if (name && apellido && email && amount && tipoMoneda && paymentMethod) {
+            // Mostrar los datos en la página
+            document.getElementById('receipt-name').textContent = name;
+            document.getElementById('receipt-apellido').textContent = apellido;
+            document.getElementById('receipt-email').textContent = email;
+            document.getElementById('receipt-amount').textContent = amount;
+            document.getElementById('receipt-tipo-moneda').textContent = tipoMoneda;
+            document.getElementById('receipt-method').textContent = paymentMethod;
+        } else {
+            // Si faltan parámetros, mostrar un mensaje de error
+            alert('Faltan datos en la URL. No se puede generar la boleta de donación.');
+        }
+
+        // Funcionalidad de descarga de la boleta en PDF
+        document.getElementById('downloadReceipt').addEventListener('click', function () {
+            if (name && apellido && email && amount && tipoMoneda && paymentMethod) {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+
+                doc.text("Boleta de Donación", 20, 20);
+                doc.text("Nombre: " + name, 20, 30);
+                doc.text("Apellido: " + apellido, 20, 40);
+                doc.text("Correo: " + email, 20, 50);
+                doc.text("Monto Donado: " + amount + " " + tipoMoneda, 20, 60);
+                doc.text("Método de Pago: " + paymentMethod, 20, 70);
+
+                // Descargar el PDF
+                doc.save('boleta_donacion.pdf');
+            } else {
+                alert('No se pueden generar los datos de la boleta debido a la falta de información.');
+            }
+        });
+    </script>
+
+</body>
+</html>
